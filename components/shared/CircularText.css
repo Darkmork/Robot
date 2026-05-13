@@ -1,0 +1,19 @@
+
+/* Styles for CircularText component */
+/* Most critical styles (positioning, transform-origin) are handled inline in the TSX 
+   or globally in index.html's <style> tag for simplicity and Tailwind compatibility.
+   This file can be used for additional, non-Tailwind specific styling if needed.
+*/
+
+.circular-text {
+  /* Example: add a border for debugging or specific design */
+  /* border: 1px dashed #ccc; */
+  /* Ensure it's above other content if necessary */
+  z-index: 50; 
+}
+
+.circular-text span {
+  /* Additional span styling if needed, beyond what's in TSX */
+  /* Example: specific font weight or letter spacing not covered by Tailwind */
+  font-weight: 500; /* Example */
+}

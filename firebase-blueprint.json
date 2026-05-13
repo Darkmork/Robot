@@ -1,0 +1,58 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile information and aggregate stats.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "The unique Firebase Auth UID." },
+        "displayName": { "type": "string", "description": "The user's display name." },
+        "email": { "type": "string", "description": "The user's email address." },
+        "photoURL": { "type": "string", "description": "URL to the user's profile picture." },
+        "totalSolved": { "type": "number", "description": "Total number of problems solved." },
+        "points": { "type": "number", "description": "Total points earned." },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "displayName", "email"]
+    },
+    "Submission": {
+      "title": "Submission",
+      "description": "A record of a user's submission for a specific problem.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "UID of the user who submitted." },
+        "problemId": { "type": "string", "description": "ID of the problem." },
+        "code": { "type": "string", "description": "The submitted code." },
+        "status": { "type": "string", "enum": ["success", "failed"] },
+        "executionTime": { "type": "number" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "problemId", "code", "status", "timestamp"]
+    },
+    "PrivateInfo": {
+      "title": "PrivateInfo",
+      "description": "Sensitive user data.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["email", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Public profile data."
+    },
+    "/users/{userId}/private/info": {
+      "schema": "PrivateInfo",
+      "description": "Sensitive PII. Only owner access."
+    },
+    "/users/{userId}/submissions/{submissionId}": {
+      "schema": "Submission",
+      "description": "History of problem submissions for a user."
+    }
+  }
+}
